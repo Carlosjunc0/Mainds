@@ -1,13 +1,13 @@
 {
-  "name": "cse340",
+  "name": "mainds_web_page",
   "version": "1.0.0",
-  "description": "Starter project for CSE 340",
+  "description": "Página web para Maquinados Industriales Del Sur",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js"
   },
-  "author": "",
+  "author": "Carlos Junco",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^3.0.3",

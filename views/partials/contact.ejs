@@ -1,0 +1,33 @@
+<section>
+  <h1>Solicitar cotización</h1>
+  <p>Compártenos tu necesidad y te contactaremos con una propuesta personalizada.</p>
+
+  <form id="contactForm" action="/contacto" method="post" novalidate>
+    <label>Nombre
+      <input type="text" name="name" required value="<%= formData.name || '' %>" />
+    </label>
+    <label>Apellido
+      <input type="text" name="lastname" required value="<%= formData.lastname || '' %>" />
+    </label>
+    <label>Número de teléfono
+      <input type="text" name="phone" placeholder="123 456 7890" required value="<%= formData.phone || '' %>" />
+    </label>
+    <label>Correo electrónico
+      <input type="email" name="email" placeholder="mi_correo@gmail.com" required value="<%= formData.email || '' %>" />
+    </label>
+    <label>Comentarios
+      <textarea name="comments" rows="5" placeholder="Cuéntenos más a detalle lo que necesita para poder brindarle un servicio personalizado" required><%= formData.comments || '' %></textarea>
+    </label>
+
+    <% if (formErrors && formErrors.length) { %>
+      <ul class="form-errors">
+      <% formErrors.forEach((item) => { %>
+        <li><%= item.msg %></li>
+      <% }) %>
+      </ul>
+    <% } %>
+
+    <button class="btn btn-primary" type="submit">Enviar</button>
+    <p id="formStatus" aria-live="polite"></p>
+  </form>
+</section>

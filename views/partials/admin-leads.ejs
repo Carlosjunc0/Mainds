@@ -1,0 +1,24 @@
+<section>
+  <div class="admin-head">
+    <h1>Solicitudes recibidas</h1>
+    <form action="/admin/logout" method="post"><button class="btn btn-outline" type="submit">Cerrar sesión</button></form>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Fecha</th><th>Nombre</th><th>Teléfono</th><th>Correo</th><th>Comentarios</th></tr>
+      </thead>
+      <tbody>
+      <% leads.forEach((lead) => { %>
+        <tr>
+          <td><%= new Date(lead.created_at).toLocaleString('es-MX') %></td>
+          <td><%= `${lead.name} ${lead.lastname}` %></td>
+          <td><%= lead.phone %></td>
+          <td><%= lead.email %></td>
+          <td><%= lead.comments %></td>
+        </tr>
+      <% }) %>
+      </tbody>
+    </table>
+  </div>
+</section>
