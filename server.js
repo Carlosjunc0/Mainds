@@ -94,17 +94,17 @@ app.use((req, res, next) => {
 });
 
 app.get("/", (req, res) => {
-  res.render("pages/home", { title: "Mainds Maquinados Industriales Del Sur" });
+  res.render("partials/home", { title: "Mainds | Inicio" });
 });
 
 app.get("/servicios", (req, res) => {
-  res.render("pages/services", {
-    title: "Servicios de maquinado y grabado de precisión",
+  res.render("partials/services", {
+    title: "Mainds | Servicios",
   });
 });
 
 app.get("/contacto", (req, res) => {
-  res.render("pages/contact", { title: "Solicitar cotización" });
+  res.render("partials/contact", { title: "Mainds | Solicitar cotización" });
 });
 
 app.get("/api/trabajos", (_req, res) => {
@@ -117,6 +117,7 @@ app.get("/api/trabajos", (_req, res) => {
     {
       titulo: "Duplicado de piezas",
       descripcion:
+      
         "Reingeniería de componentes sin plano y réplica fiel por tolerancia.",
     },
     {
@@ -196,7 +197,7 @@ app.post("/contacto", leadValidation, async (req, res, next) => {
 });
 
 app.get("/admin", (req, res) => {
-  res.render("pages/admin-login", { title: "Acceso administrador" });
+  res.render("partials/admin-login", { title: "Acceso administrador" });
 });
 
 app.post("/admin/login", (req, res) => {
@@ -256,7 +257,7 @@ app.get('/admin/leads', ensureAdmin, async (req, res, next) => {
       email: decryptText(lead.email),
       comments: decryptText(lead.comments),
     }))
-    res.render('pages/admin-leads', { title: 'Solicitudes recibidas', leads: decrypted })
+    res.render('partials/admin-leads', { title: 'Solicitudes recibidas', leads: decrypted })
   } catch (error) {
     next(error)
   }

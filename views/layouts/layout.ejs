@@ -23,19 +23,20 @@
         <%= title %>
     </title>
 
-    <link rel="icon" href="images/favicon.ico----------------test-------------------" type="image/x-icon">
+    <link rel="icon" href="images/gear logo2.png" type="image/png">
     <link rel="stylesheet" href="/css/styles.css" />
     <script defer src="/js/main.js"></script>
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 </head>
 
 <body>
     <header class="site-header">
-        <a href="/" class="brand">MAINDS<span>Maquinados Industriales Del Sur</span></a>
+        <a href="/" class="brand"><img src="/images/mainds-header1.png" alt="Mainds logo image" class="logo-image"></a>
         <button class="hamburger" id="hamburgerBtn" aria-expanded="false" aria-controls="mainNav">☰</button>
         <nav id="mainNav" class="main-nav">
             <a href="/" class="<%= currentPath === '/' ? 'active' : '' %>">Inicio</a>
             <a href="/servicios" class="<%= currentPath === '/servicios' ? 'active' : '' %>">Servicios</a>
-            <a href="/contacto" class="<%= currentPath === '/contacto' ? 'active' : '' %>">Solicitar cotización</a>
+            <a href="/contacto" class="<%= currentPath === '/contacto' ? 'active' : '' %>">Contacto</a>
             <a href="/admin" class="<%= currentPath === '/admin' ? 'active' : '' %>">Admin</a>
         </nav>
     </header>
@@ -50,12 +51,13 @@
                     <%= error[0] %>
                 </div>
                 <% } %>
-                    <main><%- body %></main>
+                    <main>
+                        <%- body %>
+                    </main>
                     <footer class="site-footer">
                         <p>© <%= year %> Mainds Maquinados Industriales Del Sur.</p>
                         <div class="social-links">
-                            <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">Facebook</a>
-                            <a href="https://wa.me/5210000000000" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+                            <a href="https://www.facebook.com/share/1EZFbMNTCo/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">Facebook</a>
                         </div>
                     </footer>
 </body>
