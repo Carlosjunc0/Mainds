@@ -45,16 +45,36 @@ app.use(flash());
 // Security headers for hardening.
 app.use((req, res, next) => {
   res.setHeader("X-Content-Type-Options", "nosniff");
-  res.setHeader("X-Frame-Options", "DENY");
+  res.setHeader("X-Frame-Options", "SAMEORIGIN");
   res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
+
   res.setHeader(
     "Permissions-Policy",
-    "camera=(), microphone=(), geolocation=()",
+    "camera=(), microphone=(), geolocation=()"
   );
-  res.setHeader(
-    "Content-Security-Policy",
-    "default-src 'self'; img-src 'self' data: https:; script-src 'self'; style-src 'self' 'unsafe-inline';",
-  );
+
+res.setHeader(
+  "Content-Security-Policy",
+  `
+  default-src 'self';
+
+  script-src 'self' 'unsafe-inline' 'unsafe-eval';
+
+  connect-src 'self';
+
+  img-src 'self' data:;
+
+  style-src 'self' 'unsafe-inline';
+
+  font-src 'self';
+
+  frame-src 'self' https://www.google.com https://www.google.com/maps;
+
+  worker-src 'self' blob:;
+  `
+    .replace(/\n/g, " ")
+);
+
   next();
 });
 
