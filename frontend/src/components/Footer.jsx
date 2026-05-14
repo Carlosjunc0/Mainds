@@ -25,8 +25,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-white font-semibold mb-4 text-center">Contacto</h3>
-            {/* CORRECCIÓN: Estructura de lista válida (solo li dentro de ul) */}
+            <h3 className="text-white font-semibold mb-4 text-center">Contáctanos</h3>
             <ul className="space-y-4 text-sm text-zinc-400 flex flex-col items-center">
               <li>
                 <a

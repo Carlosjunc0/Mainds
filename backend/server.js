@@ -9,6 +9,7 @@ const rateLimit = require('express-rate-limit');
 const Message = require('./models/Message');
 
 const app = express();
+app.set('trust proxy', 1);
 const PORT = process.env.PORT || 5000;
 
 // --- 1. SEGURIDAD DE ENCABEZADOS ---
@@ -16,8 +17,9 @@ app.use(helmet());
 
 // --- 2. CONFIGURACIÓN DE CORS ESTRICTO ---
 const allowedOrigins = [
+  'http://localhost:4173', // localhost alternativo
   'http://localhost:5173', // Desarrollo
-  'https://tu-sitio-mainds.onrender.com' // Producción
+  'https://mainds.onrender.com/' // Producción
 ];
 
 app.use(cors({
@@ -44,7 +46,7 @@ app.use((req, res, next) => {
 // --- 4. RATE LIMITER (ANTISPAM) ---
 const contactLimiter = rateLimit({
   windowMs: 60 * 60 * 1000, 
-  max: 3, 
+  max: 1000, 
   message: { error: 'Demasiadas solicitudes. Por seguridad, intente de nuevo en una hora.' },
   standardHeaders: true,
   legacyHeaders: false,
@@ -53,18 +55,21 @@ const contactLimiter = rateLimit({
 // Configuración de Nodemailer
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST || 'smtp.gmail.com',
-  port: process.env.SMTP_PORT || 465,
-  secure: true,
+  port: process.env.SMTP_PORT || 587,
+  secure: false,
   auth: {
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS,
   },
+  tls: {
+    rejectUnauthorized: false
+  }
 });
 
 const formatDate = () => {
   const date = new Date();
   return date.toLocaleString('es-MX', { 
-    timeZone: 'America/Monterrey', // Ajustado a tu zona horaria en Reynosa
+    timeZone: 'America/Monterrey',
     day: '2-digit', month: '2-digit', year: '2-digit', 
     hour: '2-digit', minute: '2-digit' 
   });

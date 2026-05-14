@@ -1,54 +1,58 @@
-import { useState, useEffect, useCallback } from 'react';
-import { Link } from 'react-router-dom';
-import { m, LazyMotion, domAnimation, AnimatePresence } from 'framer-motion';
+import { useState, useEffect, useCallback } from "react";
+import { Link } from "react-router-dom";
+import { m, LazyMotion, domAnimation, AnimatePresence } from "framer-motion";
 
 // Iconos profesionales de Lucide
-import Settings from 'lucide-react/dist/esm/icons/settings';
-import Wrench from 'lucide-react/dist/esm/icons/wrench';
-import Ruler from 'lucide-react/dist/esm/icons/ruler';
-import Zap from 'lucide-react/dist/esm/icons/zap';
-import Tag from 'lucide-react/dist/esm/icons/tag';
-import Flame from 'lucide-react/dist/esm/icons/flame';
-import Layers from 'lucide-react/dist/esm/icons/layers';
-import Cpu from 'lucide-react/dist/esm/icons/cpu';
-import ChevronLeft from 'lucide-react/dist/esm/icons/chevron-left';
-import ChevronRight from 'lucide-react/dist/esm/icons/chevron-right';
+import Settings from "lucide-react/dist/esm/icons/settings";
+import Wrench from "lucide-react/dist/esm/icons/wrench";
+import Ruler from "lucide-react/dist/esm/icons/ruler";
+import Zap from "lucide-react/dist/esm/icons/zap";
+import Tag from "lucide-react/dist/esm/icons/tag";
+import Flame from "lucide-react/dist/esm/icons/flame";
+import Layers from "lucide-react/dist/esm/icons/layers";
+import Cpu from "lucide-react/dist/esm/icons/cpu";
+import ChevronLeft from "lucide-react/dist/esm/icons/chevron-left";
+import ChevronRight from "lucide-react/dist/esm/icons/chevron-right";
 
 export default function Services() {
   const galleryImages = [
-    '/assets/img/gallery/fixture de corte.webp',
-    '/assets/img/gallery/milano.webp',
-    '/assets/img/gallery/plato de corte.webp',
-    '/assets/img/gallery/láminas.webp',
-    '/assets/img/gallery/mordaza.webp',
-    '/assets/img/gallery/aguja.webp',
-    '/assets/img/gallery/validación de palanca.webp',
-    '/assets/img/gallery/rosca.webp',
-    '/assets/img/gallery/palets.webp',
-    '/assets/img/gallery/muelas.webp',
-    '/assets/img/gallery/prensa de ensamble.webp',
-    '/assets/img/gallery/aplanador.webp',
-    '/assets/img/gallery/ultem.webp',
-    '/assets/img/gallery/maquina de ensamblaje.webp',
-    '/assets/img/gallery/succión de residuos.webp',
+    "/assets/img/gallery/fixture de corte.webp",
+    "/assets/img/gallery/milano.webp",
+    "/assets/img/gallery/plato de corte.webp",
+    "/assets/img/gallery/láminas.webp",
+    "/assets/img/gallery/mordaza.webp",
+    "/assets/img/gallery/aguja.webp",
+    "/assets/img/gallery/validación de palanca.webp",
+    "/assets/img/gallery/rosca.webp",
+    "/assets/img/gallery/palets.webp",
+    "/assets/img/gallery/muelas.webp",
+    "/assets/img/gallery/prensa de ensamble.webp",
+    "/assets/img/gallery/aplanador.webp",
+    "/assets/img/gallery/ultem.webp",
+    "/assets/img/gallery/maquina de ensamblaje.webp",
+    "/assets/img/gallery/succión de residuos.webp",
   ];
 
   // Lógica del Carrusel
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextSlide = useCallback(() => {
-    setCurrentIndex((prev) => (prev === galleryImages.length - 1 ? 0 : prev + 1));
+    setCurrentIndex((prev) =>
+      prev === galleryImages.length - 1 ? 0 : prev + 1,
+    );
   }, [galleryImages.length]);
 
   const prevSlide = () => {
-    setCurrentIndex((prev) => (prev === 0 ? galleryImages.length - 1 : prev - 1));
+    setCurrentIndex((prev) =>
+      prev === 0 ? galleryImages.length - 1 : prev - 1,
+    );
   };
 
   /* --- INICIO DE NOTA: LÓGICA DE AUTO-REPRODUCCIÓN CADA 4 SEGUNDOS --- */
   useEffect(() => {
     const timer = setInterval(() => {
       nextSlide();
-    }, 4000);
+    }, 8000);
     return () => clearInterval(timer);
   }, [nextSlide]);
   /* --- FIN DE NOTA: LÓGICA DE AUTO-REPRODUCCIÓN --- */
@@ -58,57 +62,56 @@ export default function Services() {
       title: "Fresado CNC",
       icon: Settings,
       desc: "Centros de maquinado de alta velocidad para geometrías complejas. Especialistas en prototipado rápido y producción de moldes con tolerancias micrométricas.",
-      link: "Cotizar Fresado"
+      link: "Cotizar Fresado",
     },
     {
       title: "Torneado de Precisión",
       icon: Wrench,
       desc: "Fabricación de componentes cilíndricos con acabados espejo. Dominamos roscados especiales y ajustes concéntricos en una amplia gama de metales y plásticos.",
-      link: "Cotizar Torneado"
+      link: "Cotizar Torneado",
     },
     {
       title: "Diseño y Dibujo",
       icon: Ruler,
       desc: "Ingeniería inversa y modelado 3D avanzado en SolidWorks. Convertimos conceptos o piezas físicas desgastadas en planos digitales listos para manufactura.",
-      link: "Solicitar Análisis"
+      link: "Solicitar Análisis",
     },
     {
       title: "Corte por Hilo y Electroerosión",
       icon: Zap,
       desc: "Maquinado por descarga eléctrica (EDM) para cortes de extrema dureza y precisión. Ideal para cavidades intrincadas y componentes aeroespaciales.",
-      link: "Consultar EDM"
+      link: "Consultar EDM",
     },
     {
       title: "Grabado Láser",
       icon: Tag,
       desc: "Marcaje permanente de alta definición en metales y polímeros. Identificación de piezas mediante códigos QR, números de serie y logotipos corporativos.",
-      link: "Cotizar Grabado"
+      link: "Cotizar Grabado",
     },
     {
       title: "Soldadura Especializada",
       icon: Flame,
       desc: "Uniones estructurales y de precisión mediante procesos TIG/MIG. Reparación de herramentales y ensambles metal-mecánicos con alta integridad estructural.",
-      link: "Solicitar Soldadura"
+      link: "Cotizar Soldadura",
     },
     {
       title: "Tratamientos Térmicos",
       icon: Layers,
       desc: "Optimización de propiedades mecánicas. Ofrecemos templado, revenido y acabados superficiales químicos para maximizar la durabilidad y resistencia al desgaste.",
-      link: "Solicitar Tratamientos"
+      link: "Solicitar Tratamientos",
     },
     {
       title: "Integración y programación de PLC",
       icon: Cpu,
       desc: "Diseño de sistemas de control automático, programación de PLCs y desarrollo de interfaces hombre-máquina (HMI) para automatización industrial.",
-      link: "Cotizar Programación"
-    }
+      link: "Cotizar Programación",
+    },
   ];
 
   return (
     <LazyMotion features={domAnimation}>
       <m.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
         <div className="w-full pb-10">
-
           {/* Header */}
           <section className="py-10 bg-zinc-900 border-b border-zinc-800 text-center px-4">
             <m.h1
@@ -124,7 +127,8 @@ export default function Services() {
               transition={{ delay: 0.2 }}
               className="text-lg text-zinc-400 max-w-2xl mx-auto"
             >
-              Ingeniería de precisión y soluciones integrales de manufactura bajo estándares de calidad industrial.
+              Ingeniería de precisión y soluciones integrales de manufactura
+              bajo estándares de calidad industrial.
             </m.p>
           </section>
 
@@ -138,13 +142,25 @@ export default function Services() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="bg-zinc-800/30 backdrop-blur-md border border-zinc-700/50 rounded-2xl p-8 hover:border-slate-400 transition-all duration-500 group"
+                  className="bg-zinc-800/30 backdrop-blur-md border border-zinc-700/50 rounded-2xl p-8 hover:border-slate-400 transition-all duration-500 group flex flex-col h-full"
                 >
                   <item.icon className="w-12 h-12 text-slate-400 mb-6 group-hover:text-white transition-colors" />
-                  <h2 className="text-2xl font-bold text-white mb-4">{item.title}</h2>
-                  <p className="text-zinc-400 mb-8 leading-relaxed h-24">{item.desc}</p>
-                  <Link to="/contacto" className="inline-flex items-center text-xs font-bold text-slate-300 hover:text-white uppercase tracking-[0.2em] transition-all">
-                    {item.link} <span className="ml-2 group-hover:translate-x-2 transition-transform">→</span>
+                  <h2 className="text-2xl font-bold text-white mb-4">
+                    {item.title}
+                  </h2>
+
+                  <p className="text-zinc-400 mb-8 leading-relaxed flex-grow">
+                    {item.desc}
+                  </p>
+
+                  <Link
+                    to="/contacto"
+                    className="inline-flex items-center text-xs font-bold text-slate-300 hover:text-white uppercase tracking-[0.2em] transition-all pt-4 border-t border-zinc-800/50"
+                  >
+                    {item.link}{" "}
+                    <span className="ml-2 group-hover:translate-x-2 transition-transform">
+                      →
+                    </span>
                   </Link>
                 </m.div>
               ))}
@@ -154,21 +170,21 @@ export default function Services() {
           {/* Carrusel Profesional */}
           <section className="py-10 bg-zinc-950 border-y border-zinc-900 overflow-hidden">
             <div className="text-center max-w-7xl mx-auto px-4 mb-4">
-              <h2 className="text-3xl font-bold text-white mb-2">Galería de Proyectos</h2>
+              <h2 className="text-3xl font-bold text-white mb-2">
+                Galería de Proyectos
+              </h2>
               <div className="h-1 w-20 bg-slate-500 mx-auto rounded-full"></div>
             </div>
 
             <div className="relative max-w-3xl mx-auto px-4 group">
-              {/* Contenedor Principal: Altura fija responsiva */}
               <div className="relative h-[300px] md:h-[550px] w-full overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/50">
-
                 <AnimatePresence mode="wait">
                   <m.div
                     key={currentIndex}
                     initial={{ opacity: 0, scale: 0.98 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 1.02 }}
-                    transition={{ duration: 0.5 }}
+                    transition={{ duration: 0.3 }}
                     className="w-full h-full flex items-center justify-center p-2"
                   >
                     {/* Imagen con object-contain para no perder detalles */}
@@ -203,7 +219,8 @@ export default function Services() {
               {/* Info de la pieza */}
               <div className="text-center mt-4">
                 <p className="text-zinc-500 text-xs tracking-widest uppercase">
-                  Visualizando Proyecto {currentIndex + 1} de {galleryImages.length}
+                  Visualizando Proyecto {currentIndex + 1} de{" "}
+                  {galleryImages.length}
                 </p>
               </div>
 
@@ -213,8 +230,9 @@ export default function Services() {
                   <button
                     key={i}
                     onClick={() => setCurrentIndex(i)}
-                    className={`h-1 transition-all duration-500 rounded-full ${currentIndex === i ? 'w-10 bg-white' : 'w-2 bg-zinc-800'
-                      }`}
+                    className={`h-1 transition-all duration-500 rounded-full ${
+                      currentIndex === i ? "w-10 bg-white" : "w-2 bg-zinc-800"
+                    }`}
                     aria-label={`Ir a imagen ${i + 1}`}
                   />
                 ))}
@@ -242,12 +260,15 @@ export default function Services() {
               </div>
 
               <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
-                ¿Tiene un <span className="text-gradient">desafío de manufactura</span> complejo?
+                ¿Tiene un{" "}
+                <span className="text-gradient">desafío de manufactura</span>{" "}
+                complejo?
               </h2>
 
               <p className="text-zinc-400 mb-12 text-lg max-w-2xl mx-auto leading-relaxed">
-                Desde prototipos únicos hasta producción en serie. Nuestro equipo de ingenieros
-                analizará sus requerimientos para optimizar costos y garantizar la precisión de cada pieza.
+                Desde prototipos únicos hasta producción en serie. Nuestro
+                equipo de ingenieros analizará sus requerimientos para optimizar
+                costos y garantizar la precisión de cada pieza.
               </p>
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
@@ -268,16 +289,21 @@ export default function Services() {
               </div>
 
               {/* Elementos decorativos de precisión */}
-              <div className="mt-16 flex items-center justify-center gap-8 opacity-30 grayscale">
-                <div className="text-[10px] tracking-widest uppercase text-zinc-100">ISO Standards compliance</div>
+              <div className="mt-16 flex items-center justify-center gap-2 opacity-30 grayscale">
+                <div className="text-[10px] tracking-widest uppercase text-zinc-100">
+                  ISO Standards compliance
+                </div>
                 <div className="h-px w-12 bg-zinc-800"></div>
-                <div className="text-[10px] tracking-widest uppercase text-zinc-100">CNC Precision Guaranteed</div>
+                <div className="text-[10px] tracking-widest uppercase text-zinc-100">
+                  CNC Precision Guaranteed
+                </div>
                 <div className="h-px w-12 bg-zinc-800"></div>
-                <div className="text-[10px] tracking-widest uppercase text-zinc-100">Rapid Prototyping</div>
+                <div className="text-[10px] tracking-widest uppercase text-zinc-100">
+                  Rapid Prototyping
+                </div>
               </div>
             </m.div>
           </section>
-
         </div>
       </m.div>
     </LazyMotion>

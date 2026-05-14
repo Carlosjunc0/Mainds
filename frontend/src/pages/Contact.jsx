@@ -84,11 +84,11 @@ export default function Contact() {
     setSubmitStatus(null);
 
     try {
-      const response = await fetch('http://localhost:5000/api/contact', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
-      });
+});
 
       if (!response.ok) throw new Error('Error al enviar');
 
@@ -245,7 +245,7 @@ export default function Contact() {
                       {isSubmitting ? (
                         <>
                           <Loader2 className="animate-spin mr-2" size={20} />
-                          Procesando...
+                          Enviando...
                         </>
                       ) : (
                         <>
