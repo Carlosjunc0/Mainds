@@ -28,7 +28,7 @@ export default function Home() {
     <LazyMotion features={domAnimation}>
       <div className="w-full">
         {/* Hero Section */}
-        <section className="relative h-[90vh] w-full flex items-center justify-center overflow-hidden">
+        <section className="relative h-[100vh] w-full flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0 z-0">
             <div className="absolute inset-0 bg-zinc-950/70 z-10"></div>
             <picture>

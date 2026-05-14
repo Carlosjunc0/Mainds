@@ -19,7 +19,8 @@ app.use(helmet());
 const allowedOrigins = [
   'http://localhost:4173', // localhost alternativo
   'http://localhost:5173', // Desarrollo
-  'https://mainds.onrender.com/' // Producción
+  'https://mainds.onrender.com', // Producción
+  'https://www.mainds.onrender.com', // Subdominio www
 ];
 
 app.use(cors({
@@ -46,7 +47,7 @@ app.use((req, res, next) => {
 // --- 4. RATE LIMITER (ANTISPAM) ---
 const contactLimiter = rateLimit({
   windowMs: 60 * 60 * 1000, 
-  max: 1000, 
+  max: 3, 
   message: { error: 'Demasiadas solicitudes. Por seguridad, intente de nuevo en una hora.' },
   standardHeaders: true,
   legacyHeaders: false,

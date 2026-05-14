@@ -30,6 +30,7 @@ export default function Services() {
     "/assets/img/gallery/aplanador.webp",
     "/assets/img/gallery/ultem.webp",
     "/assets/img/gallery/maquina de ensamblaje.webp",
+    "/assets/img/gallery/abs y nylamid.webp",
     "/assets/img/gallery/succión de residuos.webp",
   ];
 
@@ -140,8 +141,9 @@ export default function Services() {
                   key={i}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
+                  viewport={{ once: true, amount: 0.05, margin: "0px 0px -50px 0px"}}
+                  transition={{ delay: i * 0.1, duration: 0.5, ease: "easeOut" }}
+                  style={{ willChange: "opacity, transform" }}
                   className="bg-zinc-800/30 backdrop-blur-md border border-zinc-700/50 rounded-2xl p-8 hover:border-slate-400 transition-all duration-500 group flex flex-col h-full"
                 >
                   <item.icon className="w-12 h-12 text-slate-400 mb-6 group-hover:text-white transition-colors" />
