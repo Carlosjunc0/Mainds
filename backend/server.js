@@ -8,7 +8,7 @@ const sanitize = require('mongo-sanitize');
 const rateLimit = require('express-rate-limit');
 const Message = require('./models/Message');
 
-const resend = new resend(process.env.RESEND_API_KEY);
+const resend = new Resend(process.env.RESEND_API_KEY);
 const app = express();
 app.set('trust proxy', 1);
 const PORT = process.env.PORT || 5000;
