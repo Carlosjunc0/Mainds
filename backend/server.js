@@ -3,9 +3,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const nodemailer = require('nodemailer');
-const helmet = require('helmet'); 
-const sanitize = require('mongo-sanitize'); 
-const rateLimit = require('express-rate-limit'); 
+const helmet = require('helmet');
+const sanitize = require('mongo-sanitize');
+const rateLimit = require('express-rate-limit');
 const Message = require('./models/Message');
 
 const app = express();
@@ -46,8 +46,8 @@ app.use((req, res, next) => {
 
 // --- 4. RATE LIMITER (ANTISPAM) ---
 const contactLimiter = rateLimit({
-  windowMs: 60 * 60 * 1000, 
-  max: 3, 
+  windowMs: 60 * 60 * 1000,
+  max: 8,
   message: { error: 'Demasiadas solicitudes. Por seguridad, intente de nuevo en una hora.' },
   standardHeaders: true,
   legacyHeaders: false,
@@ -64,15 +64,16 @@ const transporter = nodemailer.createTransport({
   },
   tls: {
     rejectUnauthorized: false
-  }
+  },
+  family: 4
 });
 
 const formatDate = () => {
   const date = new Date();
-  return date.toLocaleString('es-MX', { 
+  return date.toLocaleString('es-MX', {
     timeZone: 'America/Monterrey',
-    day: '2-digit', month: '2-digit', year: '2-digit', 
-    hour: '2-digit', minute: '2-digit' 
+    day: '2-digit', month: '2-digit', year: '2-digit',
+    hour: '2-digit', minute: '2-digit'
   });
 };
 
@@ -98,15 +99,24 @@ app.post('/api/contact', contactLimiter, async (req, res) => {
     const newMessage = new Message({
       nombre, apellido, telefono, email, asunto, mensaje, fechaFormateada
     });
-    
+
     if (mongoose.connection.readyState === 1) {
-       await newMessage.save();
+      await newMessage.save();
     }
+
+    if (process.env.SMTP_USER && process.env.SMTP_PASS) {
+      transporter.sendMail(mailOptions)
+        .then(() => console.log('Notificación enviada al correo.'))
+        .catch(err => console.error('Error de correo (Datos guardados en DB):', err.message));
+    }
+
+    return res.status(200).json({ message: 'Solicitud recibida correctamente.' });
+
 
     // Enviar Email
     const mailOptions = {
-      from: `"Web MAINDS" <${process.env.SMTP_USER}>`, 
-      replyTo: email, 
+      from: `"Web MAINDS" <${process.env.SMTP_USER}>`,
+      replyTo: email,
       to: 'maquinados.indelsur@gmail.com',
       subject: `[WEB CONTACTO] ${asunto}`,
       html: `
@@ -126,12 +136,6 @@ app.post('/api/contact', contactLimiter, async (req, res) => {
       `
     };
 
-    if (process.env.SMTP_USER && process.env.SMTP_PASS) {
-       await transporter.sendMail(mailOptions);
-    }
-
-    res.status(200).json({ message: 'Solicitud recibida correctamente.' });
-
   } catch (error) {
     console.error('Error Crítico:', error.message);
     res.status(500).json({ error: 'Error interno del servidor.' });
@@ -139,7 +143,7 @@ app.post('/api/contact', contactLimiter, async (req, res) => {
 });
 
 // Conexión y Arranque
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/mainds';
+const MONGO_URI = process.env.MONGO_URI;
 
 mongoose.connect(MONGO_URI)
   .then(() => {
