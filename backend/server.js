@@ -107,7 +107,7 @@ app.post('/api/contact', contactLimiter, async (req, res) => {
     const mailOptions = {
       from: `"Web MAINDS" <${process.env.SMTP_USER}>`,
       replyTo: email,
-      to: 'maquinados.indelsur@gmail.com',
+      to: 'carlosfhumano@gmail.com',
       subject: `[WEB CONTACTO] ${asunto}`,
       html: `
         <div style="font-family: sans-serif; color: #333;">
