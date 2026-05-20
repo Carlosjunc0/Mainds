@@ -104,16 +104,6 @@ app.post('/api/contact', contactLimiter, async (req, res) => {
       await newMessage.save();
     }
 
-    if (process.env.SMTP_USER && process.env.SMTP_PASS) {
-      transporter.sendMail(mailOptions)
-        .then(() => console.log('Notificación enviada al correo.'))
-        .catch(err => console.error('Error de correo (Datos guardados en DB):', err.message));
-    }
-
-    return res.status(200).json({ message: 'Solicitud recibida correctamente.' });
-
-
-    // Enviar Email
     const mailOptions = {
       from: `"Web MAINDS" <${process.env.SMTP_USER}>`,
       replyTo: email,
@@ -135,6 +125,14 @@ app.post('/api/contact', contactLimiter, async (req, res) => {
         </div>
       `
     };
+
+    if (process.env.SMTP_USER && process.env.SMTP_PASS) {
+      transporter.sendMail(mailOptions)
+        .then(() => console.log('Notificación enviada al correo.'))
+        .catch(err => console.error('Error de correo (Datos guardados en DB):', err.message));
+    }
+
+    return res.status(200).json({ message: 'Solicitud recibida correctamente.' });
 
   } catch (error) {
     console.error('Error Crítico:', error.message);
