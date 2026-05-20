@@ -54,23 +54,6 @@ const contactLimiter = rateLimit({
   legacyHeaders: false,
 });
 
-// Configuración de Nodemailer
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  host: 'smtp.gmail.com',
-  port: 465,
-  secure: true,
-  auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
-  },
-  tls: {
-    rejectUnauthorized: false,
-    minVersion: 'TLSv1.2'
-  },
-  family: 4
-});
-
 const formatDate = () => {
   const date = new Date();
   return date.toLocaleString('es-MX', {
