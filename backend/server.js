@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const { resend } = require('resend');
+const { Resend } = require('resend');
 const helmet = require('helmet');
 const sanitize = require('mongo-sanitize');
 const rateLimit = require('express-rate-limit');
